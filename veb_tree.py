@@ -1,11 +1,10 @@
-# veb_tree.py
 
 class VanEmdeBoasTree:
     def __init__(self, universe_size):
         self.u = universe_size
         self.min = None
         self.max = None
-        self.clusters = dict()  # key = high(x), value = VanEmdeBoasTree
+        self.clusters = dict()  
         self.summary = None
 
     def high(self, x):

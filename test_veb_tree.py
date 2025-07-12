@@ -47,24 +47,42 @@ def print_structure(tree):
 
     parts = [f"Min: {tree.min}"]
     for c in sorted(tree.clusters.keys()):
-        cluster_values = collect_cluster_values(tree.clusters[c])
+        cluster_values = collect_cluster_values(
+            tree.clusters[c],
+            base=c * int(tree.u ** 0.5),
+            u=tree.clusters[c].u
+        )
         if cluster_values:
             parts.append(f"C[{c}]: {', '.join(map(str, cluster_values))}")
     return ", ".join(parts)
 
 
-def collect_cluster_values(cluster):
-    # Coleta todos os valores da sub-árvore recursivamente
+def collect_cluster_values(cluster, base=0, u=None):
     values = []
+    if cluster is None or cluster.min is None:
+        return values
+
+    if u is None:
+        u = cluster.u
+
+    sqrt_u = int(u ** 0.5)
     if cluster.min is not None:
-        values.append(cluster.min)
-    for sub_cluster in cluster.clusters.values():
-        values.extend(collect_cluster_values(sub_cluster))
-    return values
+        values.append(cluster.min + base)
+    if cluster.max is not None and cluster.max != cluster.min:
+        values.append(cluster.max + base)
+
+    for h, sub_cluster in cluster.clusters.items():
+        low_values = collect_cluster_values(
+            sub_cluster,
+            base + h * sqrt_u,
+            sub_cluster.u
+        )
+        values.extend(low_values)
+
+    return sorted(set(values))
 
 
 if __name__ == "__main__":
-    # Exemplo de uso
     input_file = 'entrada.txt'
     output_file = 'saida.txt'
     process_commands(input_file, output_file)
