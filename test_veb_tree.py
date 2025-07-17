@@ -1,4 +1,8 @@
+from sys import argv
 from veb_tree import VanEmdeBoasTree
+
+ARQUIVO_ENTRADA = argv[1]
+ARQUIVO_SAIDA = f'{ARQUIVO_ENTRADA[:ARQUIVO_ENTRADA.find('.')]}_saida.txt'
 
 def process_commands(input_file, output_file):
     universe_size = 2**32  # universo de 32 bits
@@ -81,8 +85,5 @@ def collect_cluster_values(cluster, base=0, u=None):
 
     return sorted(set(values))
 
-
 if __name__ == "__main__":
-    input_file = 'entrada.txt'
-    output_file = 'saida.txt'
-    process_commands(input_file, output_file)
+    process_commands(ARQUIVO_ENTRADA, ARQUIVO_SAIDA)

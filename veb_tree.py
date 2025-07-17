@@ -7,14 +7,18 @@ class VanEmdeBoasTree:
         self.clusters = dict()  
         self.summary = None
 
+
     def high(self, x):
         return x // int(self.u ** 0.5)
+
 
     def low(self, x):
         return x % int(self.u ** 0.5)
 
+
     def index(self, high, low):
         return high * int(self.u ** 0.5) + low
+
 
     def insert(self, x):
         if self.min is None:
@@ -34,6 +38,7 @@ class VanEmdeBoasTree:
             self.clusters[h].insert(l)
         if x > self.max:
             self.max = x
+
 
     def successor(self, x):
         if self.u == 2:
@@ -56,6 +61,7 @@ class VanEmdeBoasTree:
                 offset = self.clusters[succ_cluster].min
                 return self.index(succ_cluster, offset)
         return None
+
 
     def predecessor(self, x):
         if self.u == 2:
@@ -80,6 +86,7 @@ class VanEmdeBoasTree:
                 offset = self.clusters[pred_cluster].max
                 return self.index(pred_cluster, offset)
         return None
+
 
     def delete(self, x):
         if self.min == self.max:
@@ -115,8 +122,10 @@ class VanEmdeBoasTree:
                 max_cluster = self.summary.max
                 self.max = self.index(max_cluster, self.clusters[max_cluster].max)
 
+
     def print_structure(self):
         output = f"Min: {self.min}, Max: {self.max}"
         for c in sorted(self.clusters.keys()):
             output += f", C[{c}]: {self.clusters[c].min},..."
         return output
+
