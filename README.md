@@ -1,6 +1,5 @@
 # 2º Trabalho de EDA - Van Emde Boas
 
-
 ## Como rodar?
 
 Dentro do diterório, rode, no terminal:
@@ -8,6 +7,7 @@ Dentro do diterório, rode, no terminal:
 `python test_veb_tree $(ARQUIVO_ENTRADA)`
 
 Onde `$(ARQUIVO_ENTRADA)` é o arquivo-texto com as especificações da estrutura.
+exemplo: python test_veb_tree.py entrada.txt
 
 ## Resumo do código
 
